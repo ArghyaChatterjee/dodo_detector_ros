@@ -9,7 +9,7 @@ from os.path import expanduser
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs import point_cloud2 as pc2
 from sensor_msgs.msg import Image, PointCloud2
-from dodo_detector.detection import SingleShotDetector, KeypointObjectDetector
+from dodo_detector.detection import TFObjectDetector, KeypointObjectDetector
 from dodo_detector_ros.msg import DetectedObject, DetectedObjectArray
 
 
@@ -46,7 +46,7 @@ class Detector:
             frozen_graph = expanduser(frozen_graph)
             label_map = expanduser(label_map)
 
-            self._detector = SingleShotDetector(frozen_graph, label_map, confidence=confidence)
+            self._detector = TFObjectDetector(frozen_graph, label_map, confidence=confidence)
             rospy.loginfo('Path to inference graph: ' + frozen_graph)
             rospy.loginfo('Path to label map: ' + label_map)
 
